@@ -290,7 +290,6 @@ class DyConNet(torch.nn.Module):
                 self.source = np.concatenate((self.source, src_node_ids))
                 self.destination = np.concatenate((self.destination, dst_node_ids))
                 # Slide After the Window is Filled
-                # assert (len(self.source) > self.window_size) == slide_window, '是否delete判断错误'
                 if len(self.source) > self.window_size:
                     # Determine the starting and ending indices of the deleted IDs
                     shift = len(src_node_ids)
@@ -298,8 +297,6 @@ class DyConNet(torch.nn.Module):
                     del_index_end = del_index_start + shift
                     del_src_node_ids_cal = self.source[del_index_start: del_index_end]
                     del_dst_node_ids_cal = self.destination[del_index_start: del_index_end]
-                    # assert np.array_equal(del_src_node_ids_cal, del_src_node_ids), 'src_node_ids计算错误'
-                    # assert np.array_equal(del_dst_node_ids_cal, del_dst_node_ids), 'dst_node_ids计算错误'
                     self.del_sparse_matrix(del_src_node_ids_cal, del_dst_node_ids_cal)
                     # Sliding the starting deletion point
                     self.del_index_start += shift
@@ -580,8 +577,6 @@ class DyConNet(torch.nn.Module):
         # Fill the results with filtered indices and values
         result_indices[index_row, index_col] = filtered_indices
         result_values[index_row, index_col] = filtered_values
-
-        print(f'阈值筛选用时：{time.time() - time1}')
 
         return result_indices, result_values, row_counts
 
