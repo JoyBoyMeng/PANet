@@ -27,7 +27,7 @@ from utils.load_configs import get_link_prediction_args
 from utils.windows import build_sparse_matrix, update_sparse_matrix, del_sparse_matrix, compute_neighbors, \
     select_edges_above_threshold
 from utils.co_neighbor import compute_positions, split_data, compute_values, condition_values, co_occurrence, co_count
-from models.DyConNet8 import DyConNet
+from models.DyConNet import DyConNet
 
 torch.set_printoptions(threshold=float('inf'))
 
