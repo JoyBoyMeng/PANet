@@ -27,7 +27,7 @@ from utils.load_configs import get_link_prediction_args
 from utils.windows import build_sparse_matrix, update_sparse_matrix, del_sparse_matrix, compute_neighbors, \
     select_edges_above_threshold
 from utils.co_neighbor import compute_positions, split_data, compute_values, condition_values, co_occurrence, co_count
-from models.DyConNet import DyConNet
+from models.PANet import DyConNet
 
 torch.set_printoptions(threshold=float('inf'))
 
@@ -37,6 +37,8 @@ if __name__ == "__main__":
 
     # get arguments
     args = get_link_prediction_args(is_evaluation=False)
+    if args.model_name == 'PANet':
+        args.model_name = 'DyConNet'
 
     # get data for training, validation and testing
     node_raw_features, edge_raw_features, full_data, train_data, val_data, test_data, new_node_val_data, new_node_test_data = \
