@@ -37,6 +37,8 @@ if __name__ == "__main__":
 
     # get arguments
     args = get_link_prediction_args(is_evaluation=False)
+    if args.model_name == 'PANet':
+        args.model_name = 'DyConNet'
 
     # get data for training, validation and testing
     node_raw_features, edge_raw_features, full_data, train_data, val_data, test_data, new_node_val_data, new_node_test_data = \
